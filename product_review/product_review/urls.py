@@ -13,4 +13,12 @@ urlpatterns = [
     path('products/', views.product_list),
     url(r'^api/products/$', views.product_list),
     url(r'^api/products/(?P<pk>[0-9]+)$', views.getProduct),
+
+    path('reviews/', views.review_list),
+    url(r'^api/reviews/$', views.review_list),
+    url(r'^api/reviews/(?P<pk>[0-9]+)$', views.getReview),
+
+    path('profiles/', views.profile_list),
+    url(r'^api/profiles/$', views.profile_list),
+    url(r'^api/profiles/(?P<pk>[0-9]+)$', views.getProfile),
 ]

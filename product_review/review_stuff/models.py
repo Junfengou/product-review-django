@@ -8,7 +8,7 @@ from django.conf import settings
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pic')
+    image = models.ImageField(default='default.jpg', upload_to='profile_photos')
     bio = models.CharField(max_length=200, null=True)
 
     def __str__(self):
@@ -18,7 +18,7 @@ class Profile(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
-    photo = models.CharField(max_length=200)
+    photo = models.ImageField(default='default.jpg', upload_to='product_photos')
     price = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
 
