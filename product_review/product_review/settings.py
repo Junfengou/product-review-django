@@ -143,6 +143,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+# Check back here for image issue
+MEDIA_ROOT = os.path.join(BASE_DIR, 'product_photos')
+MEDIA_URL = '/product_photos/'
 
 JWT_AUTH = {
     'JWT_VERIFY': True,

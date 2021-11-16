@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.conf import settings
+from PIL import Image
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class Profile(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
-    photo = models.ImageField(default='default.jpg', upload_to='product_photos')
+    photo = models.CharField(max_length=255)
     price = models.IntegerField()
     created_date = models.DateTimeField(default=timezone.now)
 
