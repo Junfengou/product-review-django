@@ -4,6 +4,12 @@ from django.views.decorators.csrf import csrf_exempt
 from .serializers import *
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import generics
+
+class UserCreate(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # permission_classes = (AllowAny, )
 
 @csrf_exempt
 @api_view(['GET', 'POST'])

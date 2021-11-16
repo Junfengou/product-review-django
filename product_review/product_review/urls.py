@@ -21,4 +21,6 @@ urlpatterns = [
     path('profiles/', views.profile_list),
     url(r'^api/profiles/$', views.profile_list),
     url(r'^api/profiles/(?P<pk>[0-9]+)$', views.getProfile),
+
+    path('account/register', views.UserCreate.as_view())
 ]
