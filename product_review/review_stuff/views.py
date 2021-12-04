@@ -5,6 +5,7 @@ from .serializers import *
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework import generics
+from django.contrib.auth.views import UserModel
 
 
 class UserCreate(generics.CreateAPIView):
@@ -37,12 +38,14 @@ def product_list(request):
 def getProduct(request, pk):
     try:
         product = Product.objects.get(pk=pk)
+        user = request.user
     except Product.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
         serializers = ProductSerializer(product, context={'request': request})
-        return Response(serializers.data)
+        userSerializer = UserSerializer(user, context={'request': request})
+        return Response([userSerializer.data, serializers.data])
 
     elif request.method == 'PUT':
         serializers = ProductSerializer(product, data=request.data, context={'request': request})
@@ -111,6 +114,7 @@ def profile_list(request):
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
