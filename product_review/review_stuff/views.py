@@ -24,8 +24,11 @@ def product_list(request):
     permission_classes = (IsAuthenticatedOrReadOnly)
     if request.method == 'GET':
         products = Product.objects.all()
+        user = request.user
+        userSerializer = UserSerializer(user, context={'request': request})
         serializers = ProductSerializer(products, context={'request': request}, many=True)
-        return Response({'data': serializers.data})
+        combined = {'user': userSerializer.data, 'products': serializers.data}
+        return Response({'data': combined})
     elif request.method == 'POST':
         serializers = ProductSerializer(data=request.data)
         if serializers.is_valid():
