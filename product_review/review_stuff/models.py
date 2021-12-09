@@ -32,7 +32,7 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+    user = models.ForeignKey(User,
                              # related_name='images_created',
                              on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -46,3 +46,7 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.body)
+
+    # To access items that's in other models, just add a method like this
+    def user_name(self):
+        return self.user.username
